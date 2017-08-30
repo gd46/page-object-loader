@@ -1,19 +1,20 @@
 let glob = require("glob");
 let _ = require('lodash');
 
-
-// options is optional
-glob("**/*.page.js", (er, filePaths) => {
-  // files is an array of filenames.
-  // If the `nonull` option is set, and nothing
-  // was found, then files is ["**/*.js"]
-  // er is an error object or null.
-  console.log('filePaths', filePaths);
+glob("**/*.page.js", {
+  nonull: true
+}, (er, filePaths) => {
+  let pages = {};
   filePaths.forEach((filePath) => {
-  	let fileName = filePath.split(/(\\|\/)/g).pop();
-  	let pageNameArray = fileName.split('.', 1);
-  	let pageName = pageNameArray[0];
-  	let camelCasePageName = _.camelCase(pageName);
-  	console.log(camelCasePageName.charAt(0).toUpperCase() + camelCasePageName.slice(1));
+  	let fileName = filePath.split(/(\\|\/)/g).pop(); // extract file name with extension
+  	let pageName = _.camelCase(fileName.split('.', 1)[0]); // create the file name pieces and take the first which is the name and format it
+    let pageObjectName = pageName.charAt(0).toUpperCase() + pageName.slice(1); // make the file name match the name of the page object function or class
+    pages[pageObjectName] = require(`./${filePath}`);
   });
+
+  let welcome = new pages.Welcome();
+
+  console.log('pages', pages);
+  console.log('welcome page', welcome);
+  console.log('wecome function', welcome.getWelcomeMsg());
 });
