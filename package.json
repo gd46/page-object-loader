@@ -1,6 +1,6 @@
 {
   "name": "page-object-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dynamic page object loader",
   "main": "index.js",
   "scripts": {
