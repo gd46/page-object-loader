@@ -1,5 +1,11 @@
 # Page Object Loader
 
+## Install
+
+```
+npm install page-object-loader
+```
+
 ## Goals
 
 To dynamically require page objects any where in a project. 
