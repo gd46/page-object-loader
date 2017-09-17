@@ -1,13 +1,18 @@
 {
-  "name": "glob-example",
+  "name": "page-object-loader",
   "version": "1.0.0",
-  "description": "",
+  "description": "Dynamic page object loader",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Giuseppe DiBella",
   "license": "ISC",
+  "keywords": [
+    "protractor",
+    "testing",
+    "page object"
+  ],
   "dependencies": {
     "glob": "^7.1.2",
     "lodash": "^4.17.4"
