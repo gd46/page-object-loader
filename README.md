@@ -28,7 +28,9 @@ function Example () {
 	
 }
 
-function ExampleTest
+function ExampleTest () {
+	
+}
 ```
 
 
