@@ -2,6 +2,7 @@ let glob = require('glob');
 let _ = require('lodash');
 let path = require('path');
 let pages = {};
+let pageObjectInstances = {};
 
   let filePaths = glob.sync('**/*.page.js', {
     nonull: true
@@ -18,6 +19,17 @@ let pages = {};
       // make the file name match the name of the page object function or class
       let pageObjectName = pageName.charAt(0).toUpperCase() + pageName.slice(1);
       pages[pageObjectName] = require(path.resolve(`${filePath}`));
+      createPageObjectInstance(pages[pageObjectName]);
     });
 
-module.exports = pages;
+  function createPageObjectInstance (page) {
+    if(!pageObjectInstances.hasOwnProperty(page.name)) {
+      pageObjectInstances[page.name] = new page();
+    } 
+    return pageObjectInstances[page.name];
+  };
+
+module.exports = {
+  pages: pages,
+  pageObjectInstances: pageObjectInstances
+};
